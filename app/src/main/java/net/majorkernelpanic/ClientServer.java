@@ -44,9 +44,24 @@ public class ClientServer extends Service {
                 Log.i("lixiaolu", "S : Connecting ...");
                 try {
                     Socket client = serverSocket.accept();
-                    BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    InputStreamReader inputStream = new InputStreamReader(client.getInputStream());
+                    BufferedReader in = new BufferedReader(inputStream);
+
                     str = in.readLine();
+                    Byte[] bytes = new Byte[7];
                     Log.i("lixiaolu", "S : Received :" + str);
+                    if (str != null) {
+                        for (int index = 0; index <= 6; index++) {
+                            String cmd;
+                            if (index == 6) cmd = str;
+                            else
+                                cmd = str.substring(0, str.indexOf(","));
+                            int currentCmd = Integer.parseInt(cmd);
+                            bytes[index] = (byte) currentCmd;
+                            str = str.substring(str.indexOf(",") + 1);
+                        }
+                        update(bytes);
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
