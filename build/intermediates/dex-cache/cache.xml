@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/libs/GoogleAdMobAdsSdk-6.1.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0d7313ca1a34c9ce2de798006511a4b6bc26b90b">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/GoogleAdMobAdsSdk-6.1.0-19ef239ce5ff152e01dfe6e1f4162e592b748956.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/libs/acra-4.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7864f0ac6c74d84e465aa5449fa14408b0a1418f">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/acra-4.4.0-9899f86fe7eb9a6e4e0ae17f124f04451c052be8.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-1748f52f1f721a0587d938f40e1a5039dce3c0aa.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Downloads/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-3e28c19b47637dca22240f54e21b3a284db7ed77.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/libs/scpkix-jdk15on-1.47.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6bed9af945c158e1e02dfbdf030179dd18e60d83">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/scpkix-jdk15on-1.47.0.2-15bee91a27d7a8b97814613372225583f617c126.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/libs/sc-light-jdk15on-1.47.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d5c98671cc97fa0d928be1c7eb5edd3fb95d3234">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/sc-light-jdk15on-1.47.0.2-c84cf6842a447b88360df22d63abb1da7670fcff.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/libs/scprov-jdk15on-1.47.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="1e2f52dbf7402b12b792282078b9f895512ae5af">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/scprov-jdk15on-1.47.0.2-1affc7b97e60580adf11c6e27aa9e10f720accd3.jar" />
+    </item>
+    <item
+        jar="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/lixiaolu/Desktop/LAN/spydroidOk/app/build/intermediates/pre-dexed/debug/classes-e8dd6fcbe6c5e720c667de7f3db8d14650e290b4.jar" />
+    </item>
+
+</items>
