@@ -6,6 +6,8 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.util.Log;
 
+import net.majorkernelpanic.spydroid.CommandSender;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,7 +17,7 @@ import java.net.Socket;
 public class ClientServer extends Service {
 
     private ServerSocket serverSocket;
-    private String str;
+    private CommandSender sendor;
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -25,6 +27,9 @@ public class ClientServer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        sendor = new CommandSender();
+        sendor.native_init();
         ServerTask task = new ServerTask();
         task.execute();
         Log.i("SERVICE", "service start!");
@@ -41,43 +46,37 @@ public class ClientServer extends Service {
             }
 
             while (true) {
-                Log.i("lixiaolu", "S : Connecting ...");
                 try {
                     Socket client = serverSocket.accept();
                     InputStreamReader inputStream = new InputStreamReader(client.getInputStream());
                     BufferedReader in = new BufferedReader(inputStream);
 
-                    str = in.readLine();
-                    Byte[] bytes = new Byte[7];
-                    Log.i("lixiaolu", "S : Received :" + str);
-                    if (str != null) {
-                        for (int index = 0; index <= 6; index++) {
-                            String cmd;
-                            if (index == 6) cmd = str;
-                            else
-                                cmd = str.substring(0, str.indexOf(","));
-                            int currentCmd = Integer.parseInt(cmd);
-                            bytes[index] = (byte) currentCmd;
-                            str = str.substring(str.indexOf(",") + 1);
-                        }
-                        update(bytes);
-                    }
+                    String str = in.readLine();
+                    Log.i(Constants.TAG, "S : Received :" + str);
+                    byte[] bytes = getCmdBytes(str);
+                    int i = sendor.native_update(bytes);
+                    Log.i(Constants.TAG, "Native return :" + i);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+    }
 
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
+    private byte[] getCmdBytes(String str) {
+        byte[] bytes = new byte[7];
+        if (str != null) {
+            for (int index = 0; index <= 6; index++) {
+                String cmd;
+                if (index == 6) cmd = str;
+                else
+                    cmd = str.substring(0, str.indexOf(","));
+                int currentCmd = Integer.parseInt(cmd);
+                bytes[index] = (byte) currentCmd;
+                str = str.substring(str.indexOf(",") + 1);
+            }
         }
+        return bytes;
     }
 
-    private String intToIp(int i) {
-        return (i & 0xFF) + "." +
-                ((i >> 8) & 0xFF) + "." +
-                ((i >> 16) & 0xFF) + "." +
-                (i >> 24 & 0xFF);
-    }
 }

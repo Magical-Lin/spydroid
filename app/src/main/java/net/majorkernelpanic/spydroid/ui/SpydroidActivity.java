@@ -1,23 +1,3 @@
-/*
- * Copyright (C) 2011-2013 GUIGUI Simon, fyhertz@gmail.com
- * 
- * This file is part of Spydroid (http://code.google.com/p/spydroid-ipcamera/)
- * 
- * Spydroid is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- * 
- * This source code is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this source code; if not, write to the Free Software
- * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- */
-
 package net.majorkernelpanic.spydroid.ui;
 
 import android.app.AlertDialog;
@@ -48,6 +28,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import net.majorkernelpanic.ClientServer;
+import net.majorkernelpanic.Constants;
 import net.majorkernelpanic.http.TinyHttpServer;
 import net.majorkernelpanic.spydroid.R;
 import net.majorkernelpanic.spydroid.SpydroidApplication;
@@ -86,6 +67,7 @@ public class SpydroidActivity extends FragmentActivity {
 
         setContentView(R.layout.spydroid);
 
+
         Intent intent = new Intent(SpydroidActivity.this, ClientServer.class);
         startService(intent);
 
@@ -98,7 +80,6 @@ public class SpydroidActivity extends FragmentActivity {
             mSurfaceView = (SurfaceView) findViewById(R.id.handset_camera_view);
             SessionBuilder.getInstance().setSurfaceView(mSurfaceView);
             SessionBuilder.getInstance().setPreviewOrientation(90);
-
         } else {
 
             // Tablet detected !
@@ -107,12 +88,9 @@ public class SpydroidActivity extends FragmentActivity {
             mViewPager = (ViewPager) findViewById(R.id.tablet_pager);
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
             SessionBuilder.getInstance().setPreviewOrientation(0);
-
         }
 
         mViewPager.setAdapter(mAdapter);
-
-        // Remove the ads if this is the donate version of the app.
         if (mApplication.DONATE_VERSION) {
             ((LinearLayout) findViewById(R.id.adcontainer)).removeAllViews();
         }
@@ -127,10 +105,7 @@ public class SpydroidActivity extends FragmentActivity {
 
     public void onStart() {
         super.onStart();
-
-        // Lock screen
         mWakeLock.acquire();
-
         if (mApplication.notificationEnabled) {
             Intent notificationIntent = new Intent(this, SpydroidActivity.class);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
@@ -232,6 +207,7 @@ public class SpydroidActivity extends FragmentActivity {
 
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.i(Constants.TAG, "onServiceConnected!");
             mRtspServer = ((RtspServer.LocalBinder) service).getService();
             mRtspServer.addCallbackListener(mRtspCallbackListener);
             mRtspServer.start();
