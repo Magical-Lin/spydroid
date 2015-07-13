@@ -78,5 +78,4 @@ public class ClientServer extends Service {
         }
         return bytes;
     }
-
 }
