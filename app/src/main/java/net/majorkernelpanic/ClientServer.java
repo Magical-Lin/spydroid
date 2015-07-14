@@ -55,8 +55,6 @@ public class ClientServer extends Service {
                     Log.i(Constants.TAG, "S : Received :" + str);
                     byte[] bytes = getCmdBytes(str);
                     int i = sendor.native_update(bytes);
-                    Log.i(Constants.TAG, "Native return :" + i);
-
 //                    OutputStream outputStream = client.getOutputStream();
 //                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
 //                    PrintWriter printWriter = new PrintWriter(writer);
