@@ -56,6 +56,12 @@ public class ClientServer extends Service {
                     byte[] bytes = getCmdBytes(str);
                     int i = sendor.native_update(bytes);
                     Log.i(Constants.TAG, "Native return :" + i);
+
+//                    OutputStream outputStream = client.getOutputStream();
+//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
+//                    PrintWriter printWriter = new PrintWriter(writer);
+//                    printWriter.println(i + "");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -64,11 +70,11 @@ public class ClientServer extends Service {
     }
 
     private byte[] getCmdBytes(String str) {
-        byte[] bytes = new byte[7];
+        byte[] bytes = new byte[4];
         if (str != null) {
-            for (int index = 0; index <= 6; index++) {
+            for (int index = 0; index <= 3; index++) {
                 String cmd;
-                if (index == 6) cmd = str;
+                if (index == 3) cmd = str;
                 else
                     cmd = str.substring(0, str.indexOf(","));
                 int currentCmd = Integer.parseInt(cmd);
