@@ -50,16 +50,10 @@ public class ClientServer extends Service {
                     Socket client = serverSocket.accept();
                     InputStreamReader inputStream = new InputStreamReader(client.getInputStream());
                     BufferedReader in = new BufferedReader(inputStream);
-
                     String str = in.readLine();
                     Log.i(Constants.TAG, "S : Received :" + str);
                     byte[] bytes = getCmdBytes(str);
-                    int i = sendor.native_update(bytes);
-//                    OutputStream outputStream = client.getOutputStream();
-//                    BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(outputStream));
-//                    PrintWriter printWriter = new PrintWriter(writer);
-//                    printWriter.println(i + "");
-
+                    sendor.native_update(bytes);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
