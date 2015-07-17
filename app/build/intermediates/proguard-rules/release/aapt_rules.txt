@@ -12,6 +12,9 @@
 # view res/layout/spydroid.xml #generated:52
 -keep class com.google.ads.AdView { <init>(...); }
 
+# view AndroidManifest.xml #generated:49
+-keep class net.majorkernelpanic.ClientServer { <init>(...); }
+
 # view AndroidManifest.xml #generated:24
 -keep class net.majorkernelpanic.spydroid.SpydroidApplication { <init>(...); }
 

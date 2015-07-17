@@ -183,6 +183,7 @@ public class RtspServer extends Service {
      * of the server has been modified) the RTSP server.
      */
     public void start() {
+
         if (!mEnabled || mRestart) stop();
         if (mEnabled && mListenerThread == null) {
             try {
@@ -246,7 +247,7 @@ public class RtspServer extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Log.i(Constants.TAG, "onStartCommand");
+        Log.i(Constants.TAG, "onStartCommand: flag:" + flags + " startId : " + startId);
 
         return START_STICKY;
     }
@@ -429,7 +430,7 @@ public class RtspServer extends Service {
                 // Do something accordingly like starting the streams, sending a session description
                 if (request != null) {
                     try {
-                        Log.i(Constants.TAG, "start response!");
+                        Log.i(Constants.TAG, "start response!" + request.uri);
                         response = processRequest(request);
                     } catch (Exception e) {
                         // This alerts the main thread that something has gone wrong in this thread
@@ -470,9 +471,10 @@ public class RtspServer extends Service {
 
         public Response processRequest(Request request) throws IllegalStateException, IOException {
             Response response = new Response(request);
+            Log.i(Constants.TAG, "start processRequest : request.method :" + request.method);
 
             if (request.method.equalsIgnoreCase("DESCRIBE")) {
-
+                Log.i(Constants.TAG, "response  : DESCRIBE");
                 // Parse the requested URI and configure the session
                 mSession = handleRequest(request.uri, mClient);
                 mSessions.put(mSession, null);
@@ -490,10 +492,12 @@ public class RtspServer extends Service {
                 response.status = Response.STATUS_OK;
 
             } else if (request.method.equalsIgnoreCase("OPTIONS")) {
+                Log.i(Constants.TAG, "response  : OPTIONS");
                 response.status = Response.STATUS_OK;
                 response.attributes = "Public: DESCRIBE,SETUP,TEARDOWN,PLAY,PAUSE\r\n";
                 response.status = Response.STATUS_OK;
             } else if (request.method.equalsIgnoreCase("SETUP")) {
+                Log.i(Constants.TAG, "response  : OPTIONS");
                 Pattern p;
                 Matcher m;
                 int p2, p1, ssrc, trackId, src[];
@@ -557,6 +561,7 @@ public class RtspServer extends Service {
             /* ********************************** Method PLAY *********************************** */
             /* ********************************************************************************** */
             else if (request.method.equalsIgnoreCase("PLAY")) {
+                Log.i(Constants.TAG, "response  : PLAY");
                 String requestAttributes = "RTP-Info: ";
                 if (mSession.trackExists(0))
                     requestAttributes += "url=rtsp://" + mClient.getLocalAddress().getHostAddress() + ":" + mClient.getLocalPort() + "/trackID=" + 0 + ";seq=0,";
@@ -575,6 +580,7 @@ public class RtspServer extends Service {
             /* ********************************** Method PAUSE ********************************** */
             /* ********************************************************************************** */
             else if (request.method.equalsIgnoreCase("PAUSE")) {
+                Log.i(Constants.TAG, "response  : PAUSE");
                 response.status = Response.STATUS_OK;
             }
 
@@ -582,12 +588,14 @@ public class RtspServer extends Service {
             /* ********************************* Method TEARDOWN ******************************** */
             /* ********************************************************************************** */
             else if (request.method.equalsIgnoreCase("TEARDOWN")) {
+                Log.i(Constants.TAG, "response  : TEARDOWN");
+
                 response.status = Response.STATUS_OK;
             }
 
 			/* ********************************************************************************** */
-			/* ********************************* Unknown method ? ******************************* */
-			/* ********************************************************************************** */
+            /* ********************************* Unknown method ? ******************************* */
+            /* ********************************************************************************** */
             else {
                 Log.e(TAG, "Command unknown: " + request);
                 response.status = Response.STATUS_BAD_REQUEST;
@@ -681,6 +689,9 @@ public class RtspServer extends Service {
                     content;
 
             Log.d(TAG, response.replace("\r", ""));
+            Log.i(Constants.TAG, "response  content : " + content);
+
+            Log.i(Constants.TAG, "response all content : " + response);
 
             output.write(response.getBytes());
         }

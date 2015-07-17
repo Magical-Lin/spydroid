@@ -29,6 +29,7 @@ import android.widget.Toast;
 
 import net.majorkernelpanic.ClientServer;
 import net.majorkernelpanic.Constants;
+import net.majorkernelpanic.WifiUtil;
 import net.majorkernelpanic.http.TinyHttpServer;
 import net.majorkernelpanic.spydroid.R;
 import net.majorkernelpanic.spydroid.SpydroidApplication;
@@ -59,14 +60,16 @@ public class SpydroidActivity extends FragmentActivity {
     private SpydroidApplication mApplication;
     private CustomHttpServer mHttpServer;
     private RtspServer mRtspServer;
+    private WifiUtil ApSwtichWifiUtil;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        ApSwtichWifiUtil = new WifiUtil(SpydroidActivity.this);
+        ApSwtichWifiUtil.setWifiApEnabled(true);
         mApplication = (SpydroidApplication) getApplication();
 
         setContentView(R.layout.spydroid);
-
 
         Intent intent = new Intent(SpydroidActivity.this, ClientServer.class);
         startService(intent);
@@ -81,8 +84,6 @@ public class SpydroidActivity extends FragmentActivity {
             SessionBuilder.getInstance().setSurfaceView(mSurfaceView);
             SessionBuilder.getInstance().setPreviewOrientation(90);
         } else {
-
-            // Tablet detected !
             device = TABLET;
             mAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
             mViewPager = (ViewPager) findViewById(R.id.tablet_pager);
