@@ -11,6 +11,8 @@ import net.majorkernelpanic.spydroid.CommandSender;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -54,6 +56,12 @@ public class ClientServer extends Service {
                     Log.i(Constants.TAG, "S : Received :" + str);
                     byte[] bytes = getCmdBytes(str);
                     sendor.native_update(bytes);
+
+
+                    OutputStream outputStream = client.getOutputStream();
+                    PrintStream stream = new PrintStream(outputStream);
+                    stream.print("success");
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

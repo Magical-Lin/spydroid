@@ -9,14 +9,14 @@ import java.lang.reflect.Method;
 
 public class WifiUtil {
     ConnectivityManager mConnectivityManager;
-    Context mcontext;
+    Context mContext;
     WifiManager wifiManager;
     private static boolean WifiApMode = false;
 
     public WifiUtil(Context paramContext) {
-        this.mcontext = paramContext;
-        this.wifiManager = ((WifiManager) this.mcontext.getSystemService(Context.WIFI_SERVICE));
-        this.mConnectivityManager = ((ConnectivityManager) this.mcontext.getSystemService(Context.CONNECTIVITY_SERVICE));
+        this.mContext = paramContext;
+        this.wifiManager = ((WifiManager) this.mContext.getSystemService(Context.WIFI_SERVICE));
+        this.mConnectivityManager = ((ConnectivityManager) this.mContext.getSystemService(Context.CONNECTIVITY_SERVICE));
     }
 
     public boolean setWifiApEnabled(boolean paramBoolean) {
@@ -25,7 +25,7 @@ public class WifiUtil {
             this.wifiManager.setWifiEnabled(false);
             try {
                 WifiConfiguration localWifiConfiguration2 = new WifiConfiguration();
-                localWifiConfiguration2.SSID = "Rk3288_AP";
+                localWifiConfiguration2.SSID = "TestForLi";
                 Class localClass2 = this.wifiManager.getClass();
                 Class[] arrayOfClass2 = new Class[2];
                 arrayOfClass2[0] = WifiConfiguration.class;
