@@ -65,6 +65,7 @@ public class ClientServer extends Service {
                 }
             }
         }
+
     }
 
     private byte[] getCmdBytes(String str) {
