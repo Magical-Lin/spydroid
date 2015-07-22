@@ -57,11 +57,9 @@ public class ClientServer extends Service {
                     byte[] bytes = getCmdBytes(str);
                     sendor.native_update(bytes);
 
-
                     OutputStream outputStream = client.getOutputStream();
                     PrintStream stream = new PrintStream(outputStream);
                     stream.print("success");
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

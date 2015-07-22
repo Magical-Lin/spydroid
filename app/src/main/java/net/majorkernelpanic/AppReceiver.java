@@ -8,7 +8,6 @@ import android.util.Log;
 import net.majorkernelpanic.spydroid.ui.SpydroidActivity;
 
 public class AppReceiver extends BroadcastReceiver {
-    //    static final String ACTION = "android.intent.action.BOOT_COMPLETED";
     String ACTION = "android.intent.action.BOOT_COMPLETED";
 
     @Override
