@@ -608,7 +608,6 @@ public class RtspServer extends Service {
     }
 
     static class Request {
-
         // Parse method & uri
         public static final Pattern regexMethod = Pattern.compile("(\\w+) (\\S+) RTSP", Pattern.CASE_INSENSITIVE);
         // Parse a request header
